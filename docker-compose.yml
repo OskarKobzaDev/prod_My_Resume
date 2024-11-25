@@ -5,7 +5,6 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: my-laravel-app
         container_name: my-laravel-app
         restart: unless-stopped
         working_dir: /var/www
@@ -65,14 +64,14 @@ services:
             - app-network
         ports:
             - "6379:6379"
-#  na produkcji
-#    certbot:
-#        image: certbot/certbot
-#        container_name: certbot
-#        volumes:
-#            - ./certbot/conf:/etc/letsencrypt
-#            - ./certbot/www:/var/www/certbot
-#        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do sleep 1; done;'"
+
+    certbot:
+        image: certbot/certbot
+        container_name: certbot
+        volumes:
+            - ./certbot/conf:/etc/letsencrypt
+            - ./certbot/www:/var/www/certbot
+        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do sleep 1; done;'"
 networks:
     app-network:
         driver: bridge
