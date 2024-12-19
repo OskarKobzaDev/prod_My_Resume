@@ -39,6 +39,7 @@ class ProjectController extends Controller
 
     public function update(Request $request, Project $project)
     {
+
         $request->validate([
             'name' => 'required|string|max:255',
             'descriptionShort' => 'required|string|max:255',
@@ -48,6 +49,7 @@ class ProjectController extends Controller
             'pathUrl' => 'nullable|string|max:255',
             'icon' => 'nullable|file|mimes:jpg,png,svg|max:2048',
         ]);
+
 
         if ($request->hasFile('icon')) {
             $file = $request->file('icon');

@@ -17,7 +17,7 @@ class LanguageSeeder extends Seeder
             'pngPath'=>'/images/polish.png',
         ]);
         Language::factory()->create([
-            'name'=>'English (B2)',
+            'name'=>'English (C1)',
             'pngPath'=>'/images/english.png',
         ]);
     }

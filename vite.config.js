@@ -18,8 +18,16 @@ export default defineConfig({
         }),
     ],
     server: {
-        host: 'localhost', // Użycie localhost zamiast IPv6
+        host: '0.0.0.0', // Użycie localhost zamiast IPv6
         port: 5173,        // Domyślny port
-        cors: true         // Włącz CORS dla środowiska dev
-    }
+        cors: {
+            origin: 'http://resume.localhost', // Specyfikacja dozwolonego pochodzenia
+            methods: ['GET', 'POST', 'PUT', 'DELETE'],
+            credentials: true,
+        },
+        hmr: {
+            host: 'localhost',
+            port: 5173,
+        },
+    },
 });

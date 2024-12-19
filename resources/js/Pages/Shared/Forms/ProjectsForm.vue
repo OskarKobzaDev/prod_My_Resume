@@ -22,6 +22,7 @@ const form = useForm({
 const isAddEditModalOpen = ref(false);
 const isDeleteModalOpen = ref(false);
 const projectToDelete = ref(null);
+const originalData = ref(null);
 
 const openAddEditModal = (project = null) => {
     if (project) {
@@ -32,11 +33,67 @@ const openAddEditModal = (project = null) => {
         form.pathGitHub = project.pathGitHub;
         form.pathUrl = project.pathUrl;
         form.icon = null;
+
+        originalData.value = {...project};
     } else {
         form.reset();
+        originalData.value = { };
     }
     isAddEditModalOpen.value = true;
 };
+
+const saveProject = () => {
+    const formData = new FormData();
+    formData.append('id', form.id || '');
+    formData.append('name', form.name);
+    formData.append('descriptionShort', form.descriptionShort);
+    formData.append('descriptionLong', form.descriptionLong);
+    formData.append('pathGitHub', form.pathGitHub);
+    formData.append('pathUrl', form.pathUrl);
+    if (form.icon) {
+        formData.append('icon', form.icon);
+    }
+    if (form.id) {
+        form.post(route("projects.update", form.id), formData,{
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+            onSuccess: () => {
+                isAddEditModalOpen.value = false;
+                projectToDelete.value = null;
+            },
+            onError: (errors) => {
+                console.error("Error while editing:", errors);
+            },
+            preserveScroll: true,
+            preserveState: true,
+        });
+    }
+    else{
+        form.post(route("projects.store"), formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+            onSuccess: () => {
+                notify({
+                    type: "success",
+                    title: "Success",
+                    text: `Language ${form.id ? "updated" : "added"} successfully.`,
+                });
+                isAddEditModalOpen.value = false;
+            },
+            onError: () => {
+                notify({
+                    type: "error",
+                    title: "Error",
+                    text: "Something went wrong. Try again.",
+                });
+            },
+            preserveScroll: true,
+            preserveState: true,
+        });
+    }
+}
 
 const projectDeleteModal = (project) => {
     projectToDelete.value = project;
@@ -56,42 +113,6 @@ const deleteProject = () => {
         });
     }
 };
-
-const saveProject = () => {
-    if (form.id) {
-        form.patch(route("projects.patch", form.id), {
-            onSuccess: () => {
-                isDeleteModalOpen.value = false;
-                projectToDelete.value = null;
-            },
-            onError: (errors) => {
-                console.error("Error while editing:", errors);
-            },
-            preserveScroll: true,
-        });
-    }
-    else{
-        form.post(route("projects.store"), {
-            onSuccess: () => {
-                notify({
-                    type: "success",
-                    title: "Success",
-                    text: `Language ${form.id ? "updated" : "added"} successfully.`,
-                });
-                isAddEditModalOpen.value = false;
-            },
-            onError: () => {
-                notify({
-                    type: "error",
-                    title: "Error",
-                    text: "Something went wrong. Try again.",
-                });
-            },
-            preserveScroll: true,
-        });
-    }
-}
-
 </script>
 
 <template>

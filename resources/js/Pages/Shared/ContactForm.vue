@@ -50,7 +50,7 @@ const handleSubmit = () => {
                 <div v-if="form.errors.email" v-text="form.errors.email" :class="isDarkMode? 'text-red-500' : 'text-red-700'" class="text-sm mt-1"></div>
                 <textarea v-model="form.message" placeholder="Your Message" class="h-40 border bg-slate-100 rounded px-4 py-2 text-gray-600"></textarea>
                 <div v-if="form.errors.message" v-text="form.errors.message" :class="isDarkMode? 'text-red-500' : 'text-red-700'" class="text-sm mt-1"></div>
-                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Send</button>
+                <button type="submit" :disabled="form.processing" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Send</button>
             </form>
 
         </div>

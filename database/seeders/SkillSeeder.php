@@ -49,5 +49,9 @@ class SkillSeeder extends Seeder
             'name'=>'Docker',
             'colorHex'=>'#0db7ed',
         ]);
+        Skill::factory()->create([
+            'name'=>'Pest',
+            'colorHex'=>'#e69bff',
+        ]);
     }
 }

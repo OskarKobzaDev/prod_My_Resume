@@ -7,6 +7,7 @@ import {Notifications} from "@kyvg/vue3-notification";
 import EducationForm from "@/Pages/Shared/Forms/EducationForm.vue";
 import ExperienceForm from "@/Pages/Shared/Forms/ExperienceForm.vue";
 import ProjectsForm from "@/Pages/Shared/Forms/ProjectsForm.vue";
+import {Head} from "@inertiajs/vue3";
 
 defineProps({
     user: Object,
@@ -20,6 +21,9 @@ defineProps({
 </script>
 
 <template>
+    <Head>
+        <title>Oskar Kobza - Resume CMS</title>
+    </Head>
     <div class="flex flex-col min-w-full w-full max-w-screen bg-zinc-200 overflow-hidden">
         <h1 class="text-3xl font-bold p-4 border-b-1 border-black">
             CMS for Resume Site

@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/experiences/{experience}', [ExperienceController::class, 'destroy'])->name('experiences.destroy');
 
     Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
-    Route::patch('/projects/{project}', [ProjectController::class, 'update'])->name('projects.patch');
+    Route::post('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
     Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 });
 
