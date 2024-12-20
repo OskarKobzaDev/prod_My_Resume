@@ -44,10 +44,10 @@ const autoplayConfig = { delay: 4000, disableOnInteraction: true };
                 >
                     <!-- Screen aplikacji -->
                     <swiper-slide class="w-full h-full">
-                        <h3 class="pl-2 text-white text-2xl font-bold bg-slate-400/70">
+                        <h3 class="text-lg pl-2 text-white md:text-2xl font-bold bg-slate-400/70">
                             {{ project.name }} - {{ project.descriptionShort}}
                         </h3>
-                        <p class="text-4xl text-red-500 pt-2 place-self-center font-bold text-center ">
+                        <p class="text-2xl md:text-4xl text-red-500 pt-2 place-self-center font-bold text-center ">
                             Swipe me up<i class="pl-3 fa-solid fa-hand-point-up"></i>
                         </p>
                     </swiper-slide>
@@ -79,5 +79,9 @@ const autoplayConfig = { delay: 4000, disableOnInteraction: true };
 .nested-swiper {
     --swiper-pagination-right: 50px;
     --swiper-pagination-color: rgba(255, 99, 71, 1);
+    background-size: cover;
+    background-position:initial;
+    background-repeat: no-repeat;
+    height: 100%;
 }
 </style>

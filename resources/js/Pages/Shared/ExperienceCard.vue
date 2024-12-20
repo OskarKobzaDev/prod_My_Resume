@@ -19,7 +19,7 @@ defineProps({
                 <i class="fas fa-map-marker-alt text-gray-500 px-2"></i>
                 <p>{{ experience.place }}</p>
             </div>
-            <p :class="isDarkMode? 'text-white' : 'text-gray-700'">
+            <p class="text-sm md:text-md lg:text-base" :class="isDarkMode? 'text-white' : 'text-gray-700'">
                 {{ experience.description }}
             </p>
         </div>
