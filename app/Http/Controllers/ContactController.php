@@ -15,11 +15,20 @@ class ContactController extends Controller
             'email' => 'required|email|max:255',
             'message' => 'required|string',
         ]);
+        $userIp = $request->ip();
+        $userAgent = $request->header('User-Agent');
 
-        Mail::raw($validated['message'], function ($mail) use ($validated) {
+        $messageContent = "You have received a new contact message:\n\n";
+        $messageContent .= "Name: " . $validated['name'] . "\n";
+        $messageContent .= "Email: " . $validated['email'] . "\n";
+        $messageContent .= "IP Address: " . $userIp . "\n";
+        $messageContent .= "User Agent: " . $userAgent . "\n\n";
+        $messageContent .= "Message:\n" . $validated['message'];
+
+        Mail::raw($messageContent, function ($mail) use ($validated) {
             $mail->to('oskarkobza@gmail.com')
-            ->subject('New Contact Message')
-                ->from($validated['email'], $validated['name']);
+                ->subject('New Contact Message')
+                ->replyTo($validated['email'], $validated['name']);
         });
 
         return back()->with('success', 'Message sent successfully!');
