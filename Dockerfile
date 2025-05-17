@@ -26,6 +26,8 @@ RUN apt-get update && apt-get install -y \
     && apt-get purge -y --auto-remove autoconf make gcc g++ libc6-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get install -y libzip4
+
 WORKDIR /var/www/prod_My_Resume
 
 RUN chown -R www-data:www-data /var/www/prod_My_Resume
