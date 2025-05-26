@@ -17,6 +17,14 @@ export default defineConfig({
             },
         }),
     ],
+    build: {
+        rollupOptions: {
+            output: {
+                inlineDynamicImports: false,
+                manualChunks: undefined,
+	    }
+        }
+    },
     server: {
         host: '0.0.0.0', // Użycie localhost zamiast IPv6
         port: 5173,        // Domyślny port
@@ -31,3 +39,4 @@ export default defineConfig({
         },
     },
 });
+
